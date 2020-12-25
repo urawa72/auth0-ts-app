@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+interface IAnswer {
+  answer: string;
+  author: string;
+}
+
 export interface IQuestion {
   id: number;
   title: string;
   description: string;
-  answers: string[];
+  answers: IAnswer[];
+  author: string;
 }
 
 const Questions = () => {
@@ -22,6 +28,15 @@ const Questions = () => {
   return (
     <div className="container">
       <div className="row">
+        <Link to="/new-question">
+          <div className="card text-white bg-secondary mb-3">
+            <div className="card-header">Need help? Ask here!</div>
+            <div className="card-body">
+              <h4 className="card-title">+ New Question</h4>
+              <p className="card-text">Don&apos;t worry. Help is on the way!</p>
+            </div>
+          </div>
+        </Link>
         {questions === null && <p>Loading questions...</p>}
         {questions &&
           questions.map((question) => {
